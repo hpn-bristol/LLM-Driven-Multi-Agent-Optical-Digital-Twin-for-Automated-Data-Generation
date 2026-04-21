@@ -31,7 +31,7 @@ This work was partly supported by the **European Commission’s Horizon research
 If you use optical data from this repository in your research, please cite the following paper:
  
 > "**[1] S. Shen et al., "Unified monitoring and telemetry platform supporting network intelligence in optical networks," in Journal of Optical Communications and Networking, vol. 17, no. 2, pp. 139-151, February 2025, doi: 10.1364/JOCN.538552.**"  
-> [Telemetry-JOCN-2025](https://ieeexplore.ieee.org/document/10856707)]
+> [Telemetry-JOCN-2025](https://ieeexplore.ieee.org/document/10856707)
 
 > "**[2] S. Shen et al., "LSTM Assisted Optical Transmission Performance Analysis over a 493-km Field-Trial," 2023 Optical Fiber Communications Conference and Exhibition (OFC), San Diego, CA, USA, 2023, pp. 1-3, doi: 10.1364/OFC.2023.W4G.4.**"
 > [LSTM-OFC-2023](https://ieeexplore.ieee.org/document/10116761)
