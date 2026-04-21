@@ -14,11 +14,11 @@
 
 The proposed LLM-driven multi-agent optical DT framework translates natural-language user requests into executable physical-layer studies through a layered architecture comprising an agentic AI layer, an orchestrator, a network knowledge base, a digital twin, and the optical network physical layer. It bridges unstructured user intents and reproducible optical-network experimentation by automatically deriving study objectives, simulation constraints, scenario definitions, and reporting targets. The optical network physical layer provides real network topology, device configuration, and monitoring data through telemetry protocols such as gRPC, NETCONFIG and REST APIs. These data are stored in the knowledge base using InfluxDB and PostgreSQL to support both agent reasoning and DT execution. It also stores simulation artifacts, historical results, policies, constraints, and action logs. Specifically, InfluxDB, a time-series database, is primarily used to store time-stamped performance monitoring metrics, while the relational database PostgreSQL stores topology information, equipment configurations, and log files in JSON format. The digital twin serves as the computational core, combining physics-based, ML-based, and optimisation models for scalable QoT-related data generation and analysis. The orchestration layer manages task graphs, execution policies, simulator invocations, and lifecycle coordination across the pipeline. On top of this, the agentic AI layer performs task planning, scenario expansion, result analysis, iterative reflection, and report generation in a closed loop, enabling reliable and physically meaningful optical-network data generation with minimal manual effort.
 
-## UK National Dark Fibre Facility Topology and Equipment Configurations
+## 🌐 UK National Dark Fibre Facility Topology and Equipment Configurations
 
 ![NDFF Network](NDFF.png)
 
-The figure shows the NDFF topology in our previous experiments. For more information about the NDFF infrastructure, please refer to the official NDFF website: https://www.ndff.ac.uk/what-is-ndff
+The figure shows the NDFF topology in our previous experiments [2]. For more information about the NDFF infrastructure, please refer to the official NDFF website: https://www.ndff.ac.uk/what-is-ndff
 
 The corresponding topology description is provided in `NDFF_Testbed.json`. This file defines the network elements and directed connections used by the simulator, including transceivers, a ROADM at the Bristol/UoB side, EDFAs, and SSMF fibre spans. The current testbed model represents a looped path starting from Bristol/UoB and traversing Bradley Stoke (BRD), Froxfield (FFD), Reading (RDG), and Powergate (PGT), before returning to Bristol/UoB. The span lengths in the topology file include 23.6 km (UoB-BRD), 94.6 km (BRD-FFD), 51.3 km (FFD-RDG), and 77 km (RDG-PGT), with the reverse direction explicitly modelled as well.
 
@@ -30,11 +30,11 @@ This work was partly supported by the **European Commission’s Horizon research
 
 If you use optical data from this repository in your research, please cite the following paper:
  
-> "**S. Shen et al., "Unified monitoring and telemetry platform supporting network intelligence in optical networks," in Journal of Optical Communications and Networking, vol. 17, no. 2, pp. 139-151, February 2025, doi: 10.1364/JOCN.538552.**"  
+> "**[1] S. Shen et al., "Unified monitoring and telemetry platform supporting network intelligence in optical networks," in Journal of Optical Communications and Networking, vol. 17, no. 2, pp. 139-151, February 2025, doi: 10.1364/JOCN.538552.**"  
 > [[https://doi.org/10.1364/JOCN.538552](https://ieeexplore.ieee.org/document/10856707)]
 
-> "**S. Shen et al., "LSTM Assisted Optical Transmission Performance Analysis over a 493-km Field-Trial," 2023 Optical Fiber Communications Conference and Exhibition (OFC), San Diego, CA, USA, 2023, pp. 1-3, doi: 10.1364/OFC.2023.W4G.4.**"
-> [(https://ieeexplore.ieee.org/document/10116761)]
+> "**[2] S. Shen et al., "LSTM Assisted Optical Transmission Performance Analysis over a 493-km Field-Trial," 2023 Optical Fiber Communications Conference and Exhibition (OFC), San Diego, CA, USA, 2023, pp. 1-3, doi: 10.1364/OFC.2023.W4G.4.**"
+> [IEEE Xplore](https://ieeexplore.ieee.org/document/10116761)
 <br>
 
 ## 📧 Contact Information
