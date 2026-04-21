@@ -1,4 +1,4 @@
-# LLM-Driven-Multi-Agent-Optical-Digital-Twin-for-Automated-Data-Generation
+# LLM-Driven Multi-Agent Optical Digital Twin for Automated Data Generation
 
 [![Python](https://img.shields.io/badge/Python-3.8%7C3.9%7C3.10-blue)](https://www.python.org/)
 [![InfluxDB](https://img.shields.io/badge/InfluxDB-2.x-brightgreen)](https://www.influxdata.com/)
@@ -6,8 +6,6 @@
 [![Apache Kafka](https://img.shields.io/badge/Apache%20Kafka-3.x-orange)](https://kafka.apache.org/)
 [![Grafana](https://img.shields.io/badge/Grafana-9.x-yellow)](https://grafana.com/)
 [![Kadeck](https://img.shields.io/badge/Kadeck-Kafka%20UI-blueviolet)](https://www.kadeck.com/)
-[![MLflow](https://img.shields.io/badge/MLflow-2.x-ff69b4)](https://mlflow.org/)
-[![MATLAB](https://img.shields.io/badge/MATLAB-R2023b-orange)](https://www.mathworks.com/products/matlab.html)
 [![OptiCommPy](https://img.shields.io/badge/OptiCommPy-Enabled-success)](https://github.com/edsonportosilva/OptiCommPy)
 [![OpenAI](https://img.shields.io/badge/OpenAI-API-black)](https://platform.openai.com/)
 
