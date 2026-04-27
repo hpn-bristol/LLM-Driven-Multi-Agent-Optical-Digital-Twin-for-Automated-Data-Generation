@@ -1,0 +1,60 @@
+{
+  "stdout": "User input for spectrum used for propagation instead of SI\nThere are 8 channels propagating\nPower mode is set to False\n=> it can be modified in eqpt_config.json - Span\n\nThere are 2 fiber spans over 118 km between tx_uob and node_ffd\n\nNow propagating between tx_uob and node_ffd:\n\nPropagating in \u001b[1;36;40mgain mode\u001b[0m: power cannot be set manually\nTransceiver tx_uob\n  GSNR (0.1nm, dB):          slot-1: 40.00, slot-2: 40.00, slot-3: 40.00, slot-4: 40.00, slot-5: 40.00, slot-6: 40.00, slot-7: 40.00, slot-8: 40.00\n  GSNR (signal bw, dB):      slot-1: 35.92, slot-2: 35.92, slot-3: 35.92, slot-4: 35.92, slot-5: 35.92, slot-6: 35.92, slot-7: 35.92, slot-8: 35.92\n  OSNR ASE (0.1nm, dB):      slot-1: 40.00, slot-2: 40.00, slot-3: 40.00, slot-4: 40.00, slot-5: 40.00, slot-6: 40.00, slot-7: 40.00, slot-8: 40.00\n  OSNR ASE (signal bw, dB):  slot-1: 35.92, slot-2: 35.92, slot-3: 35.92, slot-4: 35.92, slot-5: 35.92, slot-6: 35.92, slot-7: 35.92, slot-8: 35.92\n  CD (ps/nm):                0.00\n  PMD (ps):                  0.00\n  PDL (dB):                  0.00\n  Latency (ms):              0.00\n  Actual pch out (dBm):      slot-1: -5.50, slot-2: -5.50, slot-3: -5.50, slot-4: -120.00, slot-5: -120.00, slot-6: -5.50, slot-7: -120.00, slot-8: -120.00\nRoadm roadm_uob\n  Type_variety:            default\n  Reference loss (dB):     0.00\n  Actual loss (dB):        slot-1: 0.00, slot-2: 0.00, slot-3: 0.00, slot-4: 0.00, slot-5: 0.00, slot-6: 0.00, slot-7: 0.00, slot-8: 0.00\n  Reference pch out (dBm): -5.50\n  Actual pch out (dBm):    slot-1: -5.50, slot-2: -5.50, slot-3: -5.50, slot-4: -120.00, slot-5: -120.00, slot-6: -5.50, slot-7: -120.00, slot-8: -120.00\nEdfa edfa_uob\n  type_variety:           std_medium_gain\n  effective gain(dB):     11.48\n  (before att_in and before output VOA)\n  tilt-target(dB)         0.00\n  noise figure (dB):      13.52\n  (including att_in)\n  pad att_in (dB):        3.52\n  Power In (dBm):         0.52\n  Power Out (dBm):        12.00\n  Delta_P (dB):           None\n  target pch (dBm):       None\n  actual pch out (dBm):   slot-1: 5.98, slot-2: 5.98, slot-3: 5.98, slot-4: -28.85, slot-5: -28.85, slot-6: 5.98, slot-7: -28.85, slot-8: -28.85\n  output VOA (dB):        0.00\nFiber          fiber_uob_brd\n  type_variety:                SSMF\n  length (km):                 23.60\n  pad att_in (dB):             0.00\n  total loss (dB):             5.19\n  (includes conn loss (dB) in: 0.00 out: 0.00)\n  (conn loss out includes EOL margin defined in eqpt_config.json)\n  reference pch out (dBm):     1.79\n  actual pch out (dBm):        slot-1: 0.80, slot-2: 0.80, slot-3: 0.80, slot-4: -34.05, slot-5: -34.05, slot-6: 0.80, slot-7: -34.04, slot-8: -34.04\nTransceiver node_brd\n  GSNR (0.1nm, dB):          slot-1: 29.16, slot-2: 28.64, slot-3: 29.02, slot-4: -75.58, slot-5: -75.58, slot-6: 30.14, slot-7: -75.59, slot-8: -75.59\n  GSNR (signal bw, dB):      slot-1: 25.08, slot-2: 24.56, slot-3: 24.94, slot-4: -79.67, slot-5: -79.67, slot-6: 26.06, slot-7: -79.67, slot-8: -79.67\n  OSNR ASE (0.1nm, dB):      slot-1: 38.92, slot-2: 38.92, slot-3: 38.92, slot-4: -75.58, slot-5: -75.58, slot-6: 38.91, slot-7: -75.59, slot-8: -75.59\n  OSNR ASE (signal bw, dB):  slot-1: 34.84, slot-2: 34.84, slot-3: 34.84, slot-4: -79.67, slot-5: -79.67, slot-6: 34.83, slot-7: -79.67, slot-8: -79.67\n  CD (ps/nm):                394.12\n  PMD (ps):                  14.57\n  PDL (dB):                  0.00\n  Latency (ms):              0.12\n  Actual pch out (dBm):      slot-1: -5.50, slot-2: -5.50, slot-3: -5.50, slot-4: -120.00, slot-5: -120.00, slot-6: -5.50, slot-7: -120.00, slot-8: -120.00\nEdfa edfa_brd\n  type_variety:           std_medium_gain\n  effective gain(dB):     12.48\n  (before att_in and before output VOA)\n  tilt-target(dB)         0.00\n  noise figure (dB):      12.52\n  (including att_in)\n  pad att_in (dB):        2.52\n  Power In (dBm):         6.82\n  Power Out (dBm):        19.30\n  Delta_P (dB):           None\n  target pch (dBm):       None\n  actual pch out (dBm):   slot-1: 13.28, slot-2: 13.28, slot-3: 13.28, slot-4: -20.82, slot-5: -20.82, slot-6: 13.28, slot-7: -20.82, slot-8: -20.82\n  output VOA (dB):        0.00\nFiber          fiber_brd_ffd\n  type_variety:                SSMF\n  length (km):                 94.60\n  pad att_in (dB):             0.00\n  total loss (dB):             20.81\n  (includes conn loss (dB) in: 0.00 out: 0.00)\n  (conn loss out includes EOL margin defined in eqpt_config.json)\n  reference pch out (dBm):     -13.83\n  actual pch out (dBm):        slot-1: -6.88, slot-2: -6.80, slot-3: -6.86, slot-4: -41.64, slot-5: -41.63, slot-6: -7.03, slot-7: -41.63, slot-8: -41.63\nTransceiver node_ffd\n  GSNR (0.1nm, dB):          slot-1: 11.92, slot-2: 11.35, slot-3: 11.77, slot-4: -76.33, slot-5: -76.33, slot-6: 13.03, slot-7: -76.33, slot-8: -76.33\n  GSNR (signal bw, dB):      slot-1: 7.84, slot-2: 7.26, slot-3: 7.68, slot-4: -80.41, slot-5: -80.41, slot-6: 8.95, slot-7: -80.41, slot-8: -80.41\n  OSNR ASE (0.1nm, dB):      slot-1: 35.20, slot-2: 35.20, slot-3: 35.20, slot-4: -76.33, slot-5: -76.33, slot-6: 35.19, slot-7: -76.33, slot-8: -76.33\n  OSNR ASE (signal bw, dB):  slot-1: 31.11, slot-2: 31.11, slot-3: 31.11, slot-4: -80.41, slot-5: -80.41, slot-6: 31.11, slot-7: -80.41, slot-8: -80.41\n  CD (ps/nm):                1973.94\n  PMD (ps):                  32.62\n  PDL (dB):                  0.00\n  Latency (ms):              0.58\n  Actual pch out (dBm):      slot-1: -5.50, slot-2: -5.50, slot-3: -5.50, slot-4: -120.00, slot-5: -120.00, slot-6: -5.50, slot-7: -120.00, slot-8: -120.00\n\nTransmission results:\n  Final GSNR (0.1 nm): \u001b[1;36;40m-32.16 dB\u001b[0m\n\nThe GSNR per channel at the end of the line is:\nCh. #   Channel frequency (THz)       Channel power (dBm)    OSNR ASE (signal bw, dB)     SNR NLI (signal bw, dB)        GSNR (signal bw, dB)\n    1                 194.00000                     -7.55                       31.11                        7.86                        7.84\n    2                 194.05000                     -7.55                       31.11                        7.28                        7.26\n    3                 194.10000                     -7.55                       31.11                        7.70                        7.68\n    4                 194.15000                   -122.05                      -80.41                       10.20                      -80.41\n    5                 194.20000                   -122.05                      -80.41                       10.68                      -80.41\n    6                 194.25000                     -7.55                       31.11                        8.97                        8.95\n    7                 194.30000                   -122.05                      -80.41                       11.77                      -80.41\n    8                 194.35000                   -122.05                      -80.41                       13.85                      -80.41\n",
+  "stderr": "WARNING:gnpy.tools.json_io:\n\tWARNING missing type_variety attribute in eqpt_config.json[Roadm]\n\tdefault value is type_variety = default\n\nWARNING:gnpy.tools.json_io:\n\tWARNING missing pmd attribute in eqpt_config.json[Roadm]\n\tdefault value is pmd = 0\n\nWARNING:gnpy.tools.json_io:\n\tWARNING missing pdl attribute in eqpt_config.json[Roadm]\n\tdefault value is pdl = 0\n\nWARNING:gnpy.tools.json_io:\n\tWARNING missing pmd_coef attribute in eqpt_config.json[RamanFiber]\n\tdefault value is pmd_coef = 0\n\nWARNING:gnpy.core.network:\n\tWARNING: effective gain in Node edfa_uob\n\tis below user specified amplifier std_medium_gain\n\tmin gain: 15dB ; required gain: 11.48dB. Please check amplifier type.\n\nWARNING:gnpy.core.network:\n\tWARNING: effective gain in Node edfa_brd\n\tis below user specified amplifier std_medium_gain\n\tmin gain: 15dB ; required gain: 12.48dB. Please check amplifier type.\n\nWARNING:gnpy.core.network:\n\tWARNING: effective gain in Node edfa_ffd\n\tis below user specified amplifier std_medium_gain\n\tmin gain: 15dB ; required gain: 12.48dB. Please check amplifier type.\n\nWARNING:gnpy.core.network:\n\tWARNING: effective gain in Node edfa_rdg\n\tis below user specified amplifier std_medium_gain\n\tmin gain: 15dB ; required gain: 12.48dB. Please check amplifier type.\n\nWARNING:gnpy.core.network:\n\tWARNING: effective gain in Node edfa_pgt_uob_back\n\tis below user specified amplifier std_medium_gain\n\tmin gain: 15dB ; required gain: 12.48dB. Please check amplifier type.\n\nWARNING:gnpy.core.network:\n\tWARNING: effective gain in Node edfa_rdg_back\n\tis below user specified amplifier std_medium_gain\n\tmin gain: 15dB ; required gain: 12.48dB. Please check amplifier type.\n\nWARNING:gnpy.core.network:\n\tWARNING: effective gain in Node edfa_ffd_back\n\tis below user specified amplifier std_medium_gain\n\tmin gain: 15dB ; required gain: 12.48dB. Please check amplifier type.\n\nWARNING:gnpy.core.network:\n\tWARNING: effective gain in Node edfa_brd_back\n\tis below user specified amplifier std_medium_gain\n\tmin gain: 15dB ; required gain: 12.48dB. Please check amplifier type.\n\nWARNING:gnpy.core.network:WARNING: maximum target power -4.5dBm in ROADM \"roadm_uob\" can not be met for at least one crossing path. Min input power from \"tx_uob\" direction is -5.5dBm. Please correct input topology.\nWARNING:gnpy.core.network:WARNING: maximum target power -4.5dBm in ROADM \"roadm_uob\" can not be met for at least one crossing path. Min input power from \"tx_uob\" direction is -5.5dBm. Please correct input topology.\n",
+  "parsed_output": {
+    "engine": "gnpy",
+    "backend": "real",
+    "status": "ok",
+    "metrics": {
+      "channels_simulated": 4,
+      "channel_slots": 8,
+      "spans_simulated": 2,
+      "launch_power_dbm": -5.5,
+      "transmitter_type": "voyager",
+      "channel_pattern": "11100100",
+      "channel_details": [
+        {
+          "channel_number": 1.0,
+          "frequency_thz": 194.0,
+          "channel_power_dbm": -7.55,
+          "osnr_signal_bw_db": 31.11,
+          "snr_nli_signal_bw_db": 7.86,
+          "gsnr_signal_bw_db": 7.84
+        },
+        {
+          "channel_number": 2.0,
+          "frequency_thz": 194.05,
+          "channel_power_dbm": -7.55,
+          "osnr_signal_bw_db": 31.11,
+          "snr_nli_signal_bw_db": 7.28,
+          "gsnr_signal_bw_db": 7.26
+        },
+        {
+          "channel_number": 3.0,
+          "frequency_thz": 194.1,
+          "channel_power_dbm": -7.55,
+          "osnr_signal_bw_db": 31.11,
+          "snr_nli_signal_bw_db": 7.7,
+          "gsnr_signal_bw_db": 7.68
+        },
+        {
+          "channel_number": 6.0,
+          "frequency_thz": 194.25,
+          "channel_power_dbm": -7.55,
+          "osnr_signal_bw_db": 31.11,
+          "snr_nli_signal_bw_db": 8.97,
+          "gsnr_signal_bw_db": 8.95
+        }
+      ],
+      "rx_signal_power_dbm": -7.55,
+      "osnr_signal_bw_db": 31.11,
+      "gsnr_signal_bw_db": 7.932,
+      "ase_signal_bw_dbm": -38.66
+    },
+    "artifacts": {
+      "gnpy_request_json": "C:\\Users\\po19996\\Downloads\\code\\ECOC2026\\oopt-gnpy\\data\\_gnpy_cli_runtime\\iter-1-scenario-997_request.json",
+      "gnpy_result_json": "C:\\Users\\po19996\\Downloads\\code\\ECOC2026\\oopt-gnpy\\data\\_gnpy_cli_runtime\\iter-1-scenario-997_result.json",
+      "gnpy_spectrum_json": "C:\\Users\\po19996\\Downloads\\code\\ECOC2026\\oopt-gnpy\\data\\_gnpy_cli_runtime\\iter-1-scenario-997_spectrum.json"
+    }
+  }
+}
