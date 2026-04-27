@@ -24,6 +24,36 @@ The corresponding topology description is provided in `NDFF_Testbed.json`. This 
 
 The file `eqpt_config_NDFF.json` specifies the physical-layer equipment and simulation parameters associated with the NDFF topology. In our current NDFF use case, the dataset generation workflow mainly focuses on the `voyager` transceiver profile and the QPSK/16QAM modulation formats defined in the equipment configuration file. Together, `NDFF_Testbed.json` and `eqpt_config_NDFF.json` provide the topology-level and equipment-level inputs required for DT-driven optical-network data generation.
 
+## GNPy-Generated QoT Datasets
+
+This repository includes two GNPy-generated Quality of Transmission (QoT) datasets for optical-network digital-twin studies:
+
+- `GNPy_3_channels/`: a 3-channel QoT dataset generated using GNPy.
+- `GNPy_8_channels/`: an 8-channel QoT dataset generated using GNPy.
+
+Both datasets are generated based on channel on/off switching patterns and two modulation formats: QPSK and 16QAM. The simulations use a 4-span optical transmission setup. For each dataset, the channel states are enumerated and evaluated to obtain QoT-related results such as GSNR, enabling data-driven analysis of channel-loading effects, modulation-format impact, and physical-layer performance variation.
+
+The dataset folders contain generated scenarios, simulation records, summary files, and QoT result files. These datasets are intended to support automated optical-network data generation, digital-twin validation, and AI/ML-based QoT modelling.
+
+### Dataset Structure
+
+```text
+GNPy_3_channels/
+├── artifacts/
+├── channel_gsnr.csv
+├── records.json
+├── report.txt
+├── scenarios.csv
+└── summary.json
+
+GNPy_8_channels/
+├── artifacts/ or artifacts.zip
+├── channel_gsnr.csv
+├── records.json
+├── report.txt
+├── scenarios.csv
+└── summary.json
+
 ## 🙌 Acknowledgment
 
 This work was partly supported by the **European Commission’s Horizon research and innovation program: Allegro project (No. 101092766)** and the **EU-funded project ECO-eNET (No. 10113933)**.
