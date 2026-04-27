@@ -37,7 +37,7 @@ The dataset folders contain generated scenarios, simulation records, summary fil
 
 ### Dataset Structure
 
-```text
+````markdown
 GNPy_3_channels
 ├── artifacts.zip
 ├── report.txt
