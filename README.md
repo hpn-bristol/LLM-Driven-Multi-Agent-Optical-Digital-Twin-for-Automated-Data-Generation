@@ -35,9 +35,10 @@ Both datasets are generated based on channel on/off switching patterns and two m
 
 The dataset folders contain generated scenarios, simulation records, summary files, and QoT result files. These datasets are intended to support automated optical-network data generation, digital-twin validation, and AI/ML-based QoT modelling.
 
-### Dataset Structure
-
 ````markdown
+### Dataset Structure
+```tex
+
 GNPy_3_channels
 ├── artifacts.zip
 ├── report.txt
@@ -49,7 +50,6 @@ GNPy_8_channels
 ├── report.txt
 ├── scenarios.csv
 └── summary.json
-```tex
 
 ## 🙌 Acknowledgment
 
