@@ -28,8 +28,8 @@ The file `eqpt_config_NDFF.json` specifies the physical-layer equipment and simu
 
 This repository includes two GNPy-generated Quality of Transmission (QoT) datasets for optical-network digital-twin studies:
 
-- `GNPy_3_channels/`: a 3-channel QoT dataset generated using GNPy.
-- `GNPy_8_channels/`: an 8-channel QoT dataset generated using GNPy.
+- `GNPy_3_channels`: a 3-channel QoT dataset generated using GNPy.
+- `GNPy_8_channels`: an 8-channel QoT dataset generated using GNPy.
 
 Both datasets are generated based on channel on/off switching patterns and two modulation formats: QPSK and 16QAM. The simulations use a 4-span optical transmission setup. For each dataset, the channel states are enumerated and evaluated to obtain QoT-related results such as GSNR, enabling data-driven analysis of channel-loading effects, modulation-format impact, and physical-layer performance variation.
 
@@ -38,21 +38,18 @@ The dataset folders contain generated scenarios, simulation records, summary fil
 ### Dataset Structure
 
 ```text
-GNPy_3_channels/
-├── artifacts/
-├── channel_gsnr.csv
-├── records.json
+GNPy_3_channels
+├── artifacts.zip
 ├── report.txt
 ├── scenarios.csv
 └── summary.json
 
-GNPy_8_channels/
-├── artifacts/ or artifacts.zip
-├── channel_gsnr.csv
-├── records.json
+GNPy_8_channels
+├── artifacts.zip
 ├── report.txt
 ├── scenarios.csv
 └── summary.json
+```tex
 
 ## 🙌 Acknowledgment
 
