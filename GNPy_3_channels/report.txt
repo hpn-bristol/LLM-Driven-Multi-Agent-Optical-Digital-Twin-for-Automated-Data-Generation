@@ -1,0 +1,39 @@
+Optical DT Dataset Report
+User request: Generate a raw QoT dataset for all NDFF paths starting from Bristol using 3 Voyager transmitters only. Use 3 channel slots and enumerate all binary on/off channel patterns across the 3 slots. Simulate only QPSK and 16QAM.
+Planned task: qot_estimation on NDFF from Bristol with scope=all_paths_from_source
+Task mode: dataset_generation
+Primary simulator focus: gnpy
+Resolved paths: 4
+Total iterations: 2
+Executed scenarios: 256
+Successful raw outputs: 224
+Execution errors: 0
+No-signal patterns: 32
+Invalid-metric outputs: 0
+Engine counts: {'gnpy': 256}
+Fallbacks away from primary engine: 0
+Transmitter counts: {'voyager': 256}
+Modulation counts: {'QPSK': 128, '16QAM': 128}
+Unique channel patterns: 8
+Launch powers used (dBm): [-5.5, -5.0, -4.5]
+Representative top-recorded scenario engine: gnpy
+Representative top-recorded scenario: tx=voyager, modulation=QPSK, baud=32.0 GBd, channels=1, power=-5.5 dBm
+Representative raw metrics: {'channels_simulated': 1, 'channel_slots': 3, 'spans_simulated': 1, 'launch_power_dbm': -5.5, 'transmitter_type': 'voyager', 'channel_pattern': '001', 'channel_details': [{'channel_number': 3.0, 'frequency_thz': 194.075, 'channel_power_dbm': 0.79, 'osnr_signal_bw_db': 31.47, 'snr_nli_signal_bw_db': 27.95, 'gsnr_signal_bw_db': 26.36}], 'rx_signal_power_dbm': 0.79, 'osnr_signal_bw_db': 31.47, 'gsnr_signal_bw_db': 26.36, 'ase_signal_bw_dbm': -30.68}
+Latest reflection: Dataset coverage is broad and KPIs are stable across the refined launch-power window. A diverse set of paths, distances, and channel load patterns have been successfully simulated using GNPy. The metrics reflect realistic trade-offs between OSNR and NLI without excessive errors.
+
+Iteration summary:
+- iteration 1: scenarios=64, ok=56, errors=0, no_signal=8, reflection=refine
+- iteration 2: scenarios=192, ok=224, errors=0, no_signal=32, reflection=stop
+
+Engines used in executed scenarios: gnpy
+
+Representative result per path:
+- bristol->bradley stoke: tx=voyager, modulation=QPSK, baud=32.0 GBd, pattern=001, power=-5.5 dBm, raw_metrics={'channels_simulated': 1, 'channel_slots': 3, 'spans_simulated': 1, 'launch_power_dbm': -5.5, 'transmitter_type': 'voyager', 'channel_pattern': '001', 'channel_details': [{'channel_number': 3.0, 'frequency_thz': 194.075, 'channel_power_dbm': 0.79, 'osnr_signal_bw_db': 31.47, 'snr_nli_signal_bw_db': 27.95, 'gsnr_signal_bw_db': 26.36}], 'rx_signal_power_dbm': 0.79, 'osnr_signal_bw_db': 31.47, 'gsnr_signal_bw_db': 26.36, 'ase_signal_bw_dbm': -30.68}
+- bristol->froxfield: tx=voyager, modulation=QPSK, baud=32.0 GBd, pattern=010, power=-5.5 dBm, raw_metrics={'channels_simulated': 1, 'channel_slots': 3, 'spans_simulated': 2, 'launch_power_dbm': -5.5, 'transmitter_type': 'voyager', 'channel_pattern': '010', 'channel_details': [{'channel_number': 2.0, 'frequency_thz': 194.0375, 'channel_power_dbm': -7.55, 'osnr_signal_bw_db': 31.11, 'snr_nli_signal_bw_db': 10.25, 'gsnr_signal_bw_db': 10.22}], 'rx_signal_power_dbm': -7.55, 'osnr_signal_bw_db': 31.11, 'gsnr_signal_bw_db': 10.22, 'ase_signal_bw_dbm': -38.66}
+- bristol->reading: tx=voyager, modulation=QPSK, baud=32.0 GBd, pattern=010, power=-5.5 dBm, raw_metrics={'channels_simulated': 1, 'channel_slots': 3, 'spans_simulated': 3, 'launch_power_dbm': -5.5, 'transmitter_type': 'voyager', 'channel_pattern': '010', 'channel_details': [{'channel_number': 2.0, 'frequency_thz': 194.0375, 'channel_power_dbm': -6.35, 'osnr_signal_bw_db': 29.24, 'snr_nli_signal_bw_db': 10.17, 'gsnr_signal_bw_db': 10.12}], 'rx_signal_power_dbm': -6.35, 'osnr_signal_bw_db': 29.24, 'gsnr_signal_bw_db': 10.12, 'ase_signal_bw_dbm': -35.59}
+- bristol->powergate: tx=voyager, modulation=QPSK, baud=32.0 GBd, pattern=100, power=-4.5 dBm, raw_metrics={'channels_simulated': 1, 'channel_slots': 3, 'spans_simulated': 4, 'launch_power_dbm': -4.5, 'transmitter_type': 'voyager', 'channel_pattern': '100', 'channel_details': [{'channel_number': 1.0, 'frequency_thz': 194.0, 'channel_power_dbm': -12.81, 'osnr_signal_bw_db': 27.61, 'snr_nli_signal_bw_db': 10.1, 'gsnr_signal_bw_db': 10.03}], 'rx_signal_power_dbm': -12.81, 'osnr_signal_bw_db': 27.61, 'gsnr_signal_bw_db': 10.03, 'ase_signal_bw_dbm': -40.42}
+
+Recommendations:
+- Proceed with utilizing the generated dataset for downstream analysis or machine learning.
+- The 000 channel patterns correctly resulted in 'no_signal', ensuring the dataset accurately represents empty spectrum conditions.
+- Path-dependent optimal launch powers (e.g., -5.5 dBm for shorter/medium paths and -4.5 dBm for longer paths like Powergate) are well captured.

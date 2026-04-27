@@ -1,0 +1,23 @@
+{
+  "scenario_id": "iter-2-scenario-81",
+  "cli_command": [
+    "C:\\ProgramData\\anaconda3\\python.exe",
+    "C:\\Users\\po19996\\Downloads\\code\\ECOC2026\\oopt-gnpy\\tools\\cli_examples.py",
+    "C:\\Users\\po19996\\Downloads\\code\\ECOC2026\\oopt-gnpy\\data\\_gnpy_cli_runtime\\iter-2-scenario-81_topology.json",
+    "tx_uob",
+    "node_ffd",
+    "-e",
+    "C:\\Users\\po19996\\Downloads\\code\\ECOC2026\\oopt-gnpy\\data\\_gnpy_cli_runtime\\iter-2-scenario-81_equipment.json",
+    "--spectrum",
+    "C:\\Users\\po19996\\Downloads\\code\\ECOC2026\\oopt-gnpy\\data\\_gnpy_cli_runtime\\iter-2-scenario-81_spectrum.json",
+    "--show-channels",
+    "-po",
+    "-4.5"
+  ],
+  "source_uid": "tx_uob",
+  "destination_uid": "node_ffd",
+  "topology": "C:\\Users\\po19996\\Downloads\\code\\ECOC2026\\oopt-gnpy\\data\\_gnpy_cli_runtime\\iter-2-scenario-81_topology.json",
+  "equipment": "C:\\Users\\po19996\\Downloads\\code\\ECOC2026\\oopt-gnpy\\data\\_gnpy_cli_runtime\\iter-2-scenario-81_equipment.json",
+  "launch_power_dbm": -4.5,
+  "channel_pattern": "010"
+}
