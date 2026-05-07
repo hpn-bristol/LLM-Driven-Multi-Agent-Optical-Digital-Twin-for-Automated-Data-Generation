@@ -14,6 +14,48 @@
 
 The proposed LLM-driven multi-agent optical DT framework translates natural-language user requests into executable physical-layer studies through a layered architecture comprising an agentic AI layer, an orchestrator, a network knowledge base, a digital twin, and the optical network physical layer. It bridges unstructured user intents and reproducible optical-network experimentation by automatically deriving study objectives, simulation constraints, scenario definitions, and reporting targets. The optical network physical layer provides real network topology, device configuration, and monitoring data through telemetry protocols such as gRPC, NETCONFIG and REST APIs. These data are stored in the knowledge base using InfluxDB and PostgreSQL to support both agent reasoning and DT execution. It also stores simulation artifacts, historical results, policies, constraints, and action logs. Specifically, InfluxDB, a time-series database, is primarily used to store time-stamped performance monitoring metrics, while the relational database PostgreSQL stores topology information, equipment configurations, and log files in JSON format. The digital twin serves as the computational core, combining physics-based, ML-based, and optimisation models for scalable QoT-related data generation and analysis. The orchestration layer manages task graphs, execution policies, simulator invocations, and lifecycle coordination across the pipeline. On top of this, the agentic AI layer performs task planning, scenario expansion, result analysis, iterative reflection, and report generation in a closed loop, enabling reliable and physically meaningful optical-network data generation with minimal manual effort.
 
+## Demonstration Videos
+
+This repository includes two demonstration videos corresponding to the two use cases in our paper.
+
+### Case 1: OptiCommPy-Based Physical-Layer Data Generation
+
+[▶ Watch Case 1 Demo](./Videos/Case1.mp4)
+
+This demo shows how the framework performs detailed physical-layer data generation using OptiCommPy. Compared with the GNPy workflow, this case provides richer coherent-transmission simulation and receiver-side digital signal processing analysis.
+
+The workflow includes:
+
+1. Natural-language physical-layer study request interpretation.
+2. Scenario generation for NDFF paths, Voyager transmitters, and QPSK/16QAM formats.
+3. WDM waveform generation.
+4. Fibre propagation simulation using the Manakov split-step Fourier model.
+5. Coherent receiver and DSP emulation.
+6. KPI extraction, including BER, EVM, GMI, SNR, and received power.
+7. Constellation visualisation at multiple DSP stages.
+
+This case demonstrates how the framework generates both **quantitative transmission KPIs** and **physically meaningful visual artifacts**, including constellation evolution from the receiver frontend to carrier phase recovery.
+
+### Case 2: GNPy-Based Network-Level QoT Data Generation
+
+[▶ Watch Case 2 Demo](./Videos/Case2.mp4)
+
+This demo shows how the multi-agent framework automatically generates a network-level QoT dataset using GNPy. The user request is converted into structured simulation tasks covering NDFF paths starting from Bristol, multiple Voyager transmitters, channel occupancy states, and QPSK/16QAM modulation formats.
+
+The workflow includes:
+
+1. Natural-language task interpretation by the Planner Agent.
+2. Scenario expansion for paths, modulation formats, channel states, and launch powers.
+3. GNPy-based digital-twin execution.
+4. GSNR result analysis.
+5. Iterative launch-power refinement through the Reflection Agent.
+6. Export of structured QoT datasets, summaries, and reports.
+
+This case focuses on **GSNR variation across routes, launch powers, modulation formats, and channel occupancy patterns**.
+
+---
+
+
 ## 🌐 UK National Dark Fibre Facility Topology and Equipment Configurations
 
 ![NDFF Network](NDFF.png)
