@@ -20,7 +20,10 @@ This repository includes two demonstration videos corresponding to the two use c
 
 ### Case 1: OptiCommPy-Based Physical-Layer Data Generation
 
-[▶ Watch Case 1 Demo](./Videos/Case1.mp4)
+
+![Case 1 Demo Preview](./Videos/Case1.gif)
+
+[▶ Watch full Case 1 Demo](./Videos/Case1.mp4)
 
 This demo shows how the framework performs detailed physical-layer data generation using OptiCommPy. Compared with the GNPy workflow, this case provides richer coherent-transmission simulation and receiver-side digital signal processing analysis.
 
@@ -38,7 +41,9 @@ This case demonstrates how the framework generates both **quantitative transmiss
 
 ### Case 2: GNPy-Based Network-Level QoT Data Generation
 
-[▶ Watch Case 2 Demo](./Videos/Case2.mp4)
+![Case 2 Demo Preview](./Videos/Case2.gif)
+
+[▶ Watch full Case 2 Demo](./Videos/Case2.mp4)
 
 This demo shows how the multi-agent framework automatically generates a network-level QoT dataset using GNPy. The user request is converted into structured simulation tasks covering NDFF paths starting from Bristol, multiple Voyager transmitters, channel occupancy states, and QPSK/16QAM modulation formats.
 
