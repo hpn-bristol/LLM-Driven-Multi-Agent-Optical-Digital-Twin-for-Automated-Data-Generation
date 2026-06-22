@@ -1,0 +1,29 @@
+ns-3 Wireless Digital Twin Expanded Dataset Report
+Source runs: 48
+Total raw flow rows: 624
+Uploaded application flow rows: 432
+Application flows with received packets: 432
+Mean throughput (Mbps): 7.49227
+Mean delay (ms): 64.041
+Mean jitter (ms): 0.55874
+Offered loads (Mbps): [2.0, 5.0, 10.0, 20.0]
+Mobility speeds (m/s): [0.5, 3.0]
+LiFi surrogate rates (Mbps): [50.0, 100.0]
+Random seeds: [1, 2, 3]
+
+Dataset structure:
+- scenarios.csv: merged flow-level wireless KPI records with compact columns and rich JSON fields.
+- summary.json: machine-readable multi-run aggregate statistics.
+- report.txt: human-readable dataset report.
+- artifacts.zip: original prompts, scenarios, reviews, generated ns-3 scripts, logs, and raw results.
+
+Rich JSON fields:
+- scenario_request_json: per-row task, target access, CPE, flow, and sweep parameters.
+- ns3_config_json: engine, command parameters, selected branch, and generated-output files.
+- branch_config_json: Wi-Fi, LTE/EPC, or LiFi-surrogate branch configuration.
+- semantic_features_json: task-relevant wireless semantic indicators.
+- validation_json: simulator compatibility and LiFi-surrogate interpretation flags.
+
+LiFi note:
+Stock ns-3.44 does not include a built-in LiFi model. LiFi rows are produced by the generated
+single-file ns-3 script using an idealized standard ns-3 access-link surrogate.

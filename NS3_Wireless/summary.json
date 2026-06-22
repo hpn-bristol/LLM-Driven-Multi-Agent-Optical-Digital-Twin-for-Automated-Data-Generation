@@ -1,0 +1,5085 @@
+{
+  "uploaded_at_utc": "2026-06-19T13:00:54.756142+00:00",
+  "schema_version": "wireless-param-sweep-v2",
+  "task": {
+    "network": "ns-3 indoor wireless digital twin",
+    "task": "wireless_kpi_collection",
+    "task_mode": "dataset_generation",
+    "preferred_engine": "ns-3.44",
+    "technologies": [
+      "Wi-Fi",
+      "LiFi-surrogate",
+      "LTE/EPC"
+    ],
+    "kpis": [
+      "throughput_mbps",
+      "packet_loss",
+      "mean_delay_ms",
+      "mean_jitter_ms"
+    ],
+    "notes": "Multi-run wireless dataset exported using the optical DT artifact pattern with per-row scenario/configuration JSON fields."
+  },
+  "schema": {
+    "primary_table": "scenarios.csv",
+    "row_granularity": "one application flow under one ns-3 scenario variant",
+    "compact_columns": [
+      "scenario_id",
+      "access_type",
+      "cpe",
+      "offered_load_mbps",
+      "mobility_speed_mps",
+      "lifi_rate_mbps",
+      "throughput_mbps",
+      "packet_loss_ratio",
+      "mean_delay_ms",
+      "mean_jitter_ms"
+    ],
+    "rich_json_columns": [
+      "scenario_request_json",
+      "ns3_config_json",
+      "branch_config_json",
+      "flow_result_json",
+      "semantic_features_json",
+      "validation_json",
+      "metrics_json"
+    ]
+  },
+  "parameter_coverage": {
+    "access_type": [
+      "LTE/EPC",
+      "LiFi-surrogate",
+      "Wi-Fi"
+    ],
+    "cpe": [
+      "CPE1",
+      "CPE2",
+      "CPE3"
+    ],
+    "random_seed": [
+      1,
+      2,
+      3
+    ],
+    "offered_load_mbps": [
+      2.0,
+      5.0,
+      10.0,
+      20.0
+    ],
+    "packet_size_bytes": [
+      1024
+    ],
+    "mobility_speed_mps": [
+      0.5,
+      3.0
+    ],
+    "lifi_rate_mbps": [
+      50.0,
+      100.0
+    ]
+  },
+  "source_runs": [
+    {
+      "run_id": "20260619T103518Z-hybrid-seed1-t10p0-l2p0-s0p5",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 1,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=1, simTime=10.0s, offeredLoad=2.0Mbps, packetSize=1024B, mobilitySpeed=0.5m/s, lifiRate=50.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 2.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 0.5,
+          "lifi_rate_mbps": 50.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T103530Z-hybrid-seed2-t10p0-l2p0-s0p5",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 2,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=2, simTime=10.0s, offeredLoad=2.0Mbps, packetSize=1024B, mobilitySpeed=0.5m/s, lifiRate=50.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 2.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 0.5,
+          "lifi_rate_mbps": 50.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T103541Z-hybrid-seed3-t10p0-l2p0-s0p5",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 3,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=3, simTime=10.0s, offeredLoad=2.0Mbps, packetSize=1024B, mobilitySpeed=0.5m/s, lifiRate=50.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 2.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 0.5,
+          "lifi_rate_mbps": 50.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T103552Z-hybrid-seed1-t10p0-l2p0-s0p5",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 1,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=1, simTime=10.0s, offeredLoad=2.0Mbps, packetSize=1024B, mobilitySpeed=0.5m/s, lifiRate=100.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 2.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 0.5,
+          "lifi_rate_mbps": 100.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T103603Z-hybrid-seed2-t10p0-l2p0-s0p5",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 2,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=2, simTime=10.0s, offeredLoad=2.0Mbps, packetSize=1024B, mobilitySpeed=0.5m/s, lifiRate=100.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 2.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 0.5,
+          "lifi_rate_mbps": 100.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T103614Z-hybrid-seed3-t10p0-l2p0-s0p5",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 3,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=3, simTime=10.0s, offeredLoad=2.0Mbps, packetSize=1024B, mobilitySpeed=0.5m/s, lifiRate=100.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 2.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 0.5,
+          "lifi_rate_mbps": 100.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T103625Z-hybrid-seed1-t10p0-l2p0-s3p0",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 1,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=1, simTime=10.0s, offeredLoad=2.0Mbps, packetSize=1024B, mobilitySpeed=3.0m/s, lifiRate=50.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 2.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 3.0,
+          "lifi_rate_mbps": 50.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T103636Z-hybrid-seed2-t10p0-l2p0-s3p0",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 2,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=2, simTime=10.0s, offeredLoad=2.0Mbps, packetSize=1024B, mobilitySpeed=3.0m/s, lifiRate=50.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 2.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 3.0,
+          "lifi_rate_mbps": 50.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T103648Z-hybrid-seed3-t10p0-l2p0-s3p0",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 3,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=3, simTime=10.0s, offeredLoad=2.0Mbps, packetSize=1024B, mobilitySpeed=3.0m/s, lifiRate=50.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 2.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 3.0,
+          "lifi_rate_mbps": 50.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T103659Z-hybrid-seed1-t10p0-l2p0-s3p0",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 1,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=1, simTime=10.0s, offeredLoad=2.0Mbps, packetSize=1024B, mobilitySpeed=3.0m/s, lifiRate=100.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 2.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 3.0,
+          "lifi_rate_mbps": 100.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T103710Z-hybrid-seed2-t10p0-l2p0-s3p0",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 2,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=2, simTime=10.0s, offeredLoad=2.0Mbps, packetSize=1024B, mobilitySpeed=3.0m/s, lifiRate=100.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 2.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 3.0,
+          "lifi_rate_mbps": 100.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T103721Z-hybrid-seed3-t10p0-l2p0-s3p0",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 3,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=3, simTime=10.0s, offeredLoad=2.0Mbps, packetSize=1024B, mobilitySpeed=3.0m/s, lifiRate=100.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 2.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 3.0,
+          "lifi_rate_mbps": 100.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T103733Z-hybrid-seed1-t10p0-l5p0-s0p5",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 1,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=1, simTime=10.0s, offeredLoad=5.0Mbps, packetSize=1024B, mobilitySpeed=0.5m/s, lifiRate=50.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 5.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 0.5,
+          "lifi_rate_mbps": 50.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T103748Z-hybrid-seed2-t10p0-l5p0-s0p5",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 2,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=2, simTime=10.0s, offeredLoad=5.0Mbps, packetSize=1024B, mobilitySpeed=0.5m/s, lifiRate=50.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 5.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 0.5,
+          "lifi_rate_mbps": 50.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T103802Z-hybrid-seed3-t10p0-l5p0-s0p5",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 3,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=3, simTime=10.0s, offeredLoad=5.0Mbps, packetSize=1024B, mobilitySpeed=0.5m/s, lifiRate=50.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 5.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 0.5,
+          "lifi_rate_mbps": 50.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T103816Z-hybrid-seed1-t10p0-l5p0-s0p5",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 1,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=1, simTime=10.0s, offeredLoad=5.0Mbps, packetSize=1024B, mobilitySpeed=0.5m/s, lifiRate=100.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 5.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 0.5,
+          "lifi_rate_mbps": 100.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T103831Z-hybrid-seed2-t10p0-l5p0-s0p5",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 2,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=2, simTime=10.0s, offeredLoad=5.0Mbps, packetSize=1024B, mobilitySpeed=0.5m/s, lifiRate=100.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 5.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 0.5,
+          "lifi_rate_mbps": 100.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T103846Z-hybrid-seed3-t10p0-l5p0-s0p5",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 3,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=3, simTime=10.0s, offeredLoad=5.0Mbps, packetSize=1024B, mobilitySpeed=0.5m/s, lifiRate=100.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 5.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 0.5,
+          "lifi_rate_mbps": 100.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T103900Z-hybrid-seed1-t10p0-l5p0-s3p0",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 1,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=1, simTime=10.0s, offeredLoad=5.0Mbps, packetSize=1024B, mobilitySpeed=3.0m/s, lifiRate=50.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 5.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 3.0,
+          "lifi_rate_mbps": 50.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T103915Z-hybrid-seed2-t10p0-l5p0-s3p0",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 2,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=2, simTime=10.0s, offeredLoad=5.0Mbps, packetSize=1024B, mobilitySpeed=3.0m/s, lifiRate=50.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 5.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 3.0,
+          "lifi_rate_mbps": 50.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T103929Z-hybrid-seed3-t10p0-l5p0-s3p0",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 3,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=3, simTime=10.0s, offeredLoad=5.0Mbps, packetSize=1024B, mobilitySpeed=3.0m/s, lifiRate=50.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 5.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 3.0,
+          "lifi_rate_mbps": 50.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T103943Z-hybrid-seed1-t10p0-l5p0-s3p0",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 1,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=1, simTime=10.0s, offeredLoad=5.0Mbps, packetSize=1024B, mobilitySpeed=3.0m/s, lifiRate=100.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 5.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 3.0,
+          "lifi_rate_mbps": 100.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T103958Z-hybrid-seed2-t10p0-l5p0-s3p0",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 2,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=2, simTime=10.0s, offeredLoad=5.0Mbps, packetSize=1024B, mobilitySpeed=3.0m/s, lifiRate=100.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 5.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 3.0,
+          "lifi_rate_mbps": 100.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T104012Z-hybrid-seed3-t10p0-l5p0-s3p0",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 3,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=3, simTime=10.0s, offeredLoad=5.0Mbps, packetSize=1024B, mobilitySpeed=3.0m/s, lifiRate=100.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 5.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 3.0,
+          "lifi_rate_mbps": 100.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T104027Z-hybrid-seed1-t10p0-l10p0-s0p5",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 1,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=1, simTime=10.0s, offeredLoad=10.0Mbps, packetSize=1024B, mobilitySpeed=0.5m/s, lifiRate=50.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 10.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 0.5,
+          "lifi_rate_mbps": 50.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T104045Z-hybrid-seed2-t10p0-l10p0-s0p5",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 2,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=2, simTime=10.0s, offeredLoad=10.0Mbps, packetSize=1024B, mobilitySpeed=0.5m/s, lifiRate=50.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 10.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 0.5,
+          "lifi_rate_mbps": 50.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T104103Z-hybrid-seed3-t10p0-l10p0-s0p5",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 3,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=3, simTime=10.0s, offeredLoad=10.0Mbps, packetSize=1024B, mobilitySpeed=0.5m/s, lifiRate=50.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 10.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 0.5,
+          "lifi_rate_mbps": 50.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T104120Z-hybrid-seed1-t10p0-l10p0-s0p5",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 1,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=1, simTime=10.0s, offeredLoad=10.0Mbps, packetSize=1024B, mobilitySpeed=0.5m/s, lifiRate=100.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 10.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 0.5,
+          "lifi_rate_mbps": 100.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T104138Z-hybrid-seed2-t10p0-l10p0-s0p5",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 2,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=2, simTime=10.0s, offeredLoad=10.0Mbps, packetSize=1024B, mobilitySpeed=0.5m/s, lifiRate=100.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 10.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 0.5,
+          "lifi_rate_mbps": 100.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T104156Z-hybrid-seed3-t10p0-l10p0-s0p5",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 3,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=3, simTime=10.0s, offeredLoad=10.0Mbps, packetSize=1024B, mobilitySpeed=0.5m/s, lifiRate=100.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 10.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 0.5,
+          "lifi_rate_mbps": 100.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T104214Z-hybrid-seed1-t10p0-l10p0-s3p0",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 1,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=1, simTime=10.0s, offeredLoad=10.0Mbps, packetSize=1024B, mobilitySpeed=3.0m/s, lifiRate=50.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 10.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 3.0,
+          "lifi_rate_mbps": 50.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T104233Z-hybrid-seed2-t10p0-l10p0-s3p0",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 2,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=2, simTime=10.0s, offeredLoad=10.0Mbps, packetSize=1024B, mobilitySpeed=3.0m/s, lifiRate=50.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 10.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 3.0,
+          "lifi_rate_mbps": 50.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T104252Z-hybrid-seed3-t10p0-l10p0-s3p0",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 3,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=3, simTime=10.0s, offeredLoad=10.0Mbps, packetSize=1024B, mobilitySpeed=3.0m/s, lifiRate=50.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 10.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 3.0,
+          "lifi_rate_mbps": 50.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T104310Z-hybrid-seed1-t10p0-l10p0-s3p0",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 1,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=1, simTime=10.0s, offeredLoad=10.0Mbps, packetSize=1024B, mobilitySpeed=3.0m/s, lifiRate=100.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 10.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 3.0,
+          "lifi_rate_mbps": 100.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T104328Z-hybrid-seed2-t10p0-l10p0-s3p0",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 2,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=2, simTime=10.0s, offeredLoad=10.0Mbps, packetSize=1024B, mobilitySpeed=3.0m/s, lifiRate=100.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 10.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 3.0,
+          "lifi_rate_mbps": 100.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T104346Z-hybrid-seed3-t10p0-l10p0-s3p0",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 3,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=3, simTime=10.0s, offeredLoad=10.0Mbps, packetSize=1024B, mobilitySpeed=3.0m/s, lifiRate=100.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 10.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 3.0,
+          "lifi_rate_mbps": 100.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T104403Z-hybrid-seed1-t10p0-l20p0-s0p5",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 1,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=1, simTime=10.0s, offeredLoad=20.0Mbps, packetSize=1024B, mobilitySpeed=0.5m/s, lifiRate=50.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 20.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 0.5,
+          "lifi_rate_mbps": 50.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T104419Z-hybrid-seed2-t10p0-l20p0-s0p5",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 2,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=2, simTime=10.0s, offeredLoad=20.0Mbps, packetSize=1024B, mobilitySpeed=0.5m/s, lifiRate=50.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 20.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 0.5,
+          "lifi_rate_mbps": 50.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T104435Z-hybrid-seed3-t10p0-l20p0-s0p5",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 3,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=3, simTime=10.0s, offeredLoad=20.0Mbps, packetSize=1024B, mobilitySpeed=0.5m/s, lifiRate=50.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 20.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 0.5,
+          "lifi_rate_mbps": 50.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T104451Z-hybrid-seed1-t10p0-l20p0-s0p5",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 1,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=1, simTime=10.0s, offeredLoad=20.0Mbps, packetSize=1024B, mobilitySpeed=0.5m/s, lifiRate=100.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 20.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 0.5,
+          "lifi_rate_mbps": 100.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T104508Z-hybrid-seed2-t10p0-l20p0-s0p5",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 2,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=2, simTime=10.0s, offeredLoad=20.0Mbps, packetSize=1024B, mobilitySpeed=0.5m/s, lifiRate=100.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 20.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 0.5,
+          "lifi_rate_mbps": 100.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T104530Z-hybrid-seed3-t10p0-l20p0-s0p5",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 3,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=3, simTime=10.0s, offeredLoad=20.0Mbps, packetSize=1024B, mobilitySpeed=0.5m/s, lifiRate=100.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 20.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 0.5,
+          "lifi_rate_mbps": 100.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T104548Z-hybrid-seed1-t10p0-l20p0-s3p0",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 1,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=1, simTime=10.0s, offeredLoad=20.0Mbps, packetSize=1024B, mobilitySpeed=3.0m/s, lifiRate=50.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 20.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 3.0,
+          "lifi_rate_mbps": 50.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T104605Z-hybrid-seed2-t10p0-l20p0-s3p0",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 2,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=2, simTime=10.0s, offeredLoad=20.0Mbps, packetSize=1024B, mobilitySpeed=3.0m/s, lifiRate=50.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 20.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 3.0,
+          "lifi_rate_mbps": 50.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T104621Z-hybrid-seed3-t10p0-l20p0-s3p0",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 3,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=3, simTime=10.0s, offeredLoad=20.0Mbps, packetSize=1024B, mobilitySpeed=3.0m/s, lifiRate=50.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 20.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 3.0,
+          "lifi_rate_mbps": 50.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T104637Z-hybrid-seed1-t10p0-l20p0-s3p0",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 1,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=1, simTime=10.0s, offeredLoad=20.0Mbps, packetSize=1024B, mobilitySpeed=3.0m/s, lifiRate=100.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 20.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 3.0,
+          "lifi_rate_mbps": 100.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T104653Z-hybrid-seed2-t10p0-l20p0-s3p0",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 2,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=2, simTime=10.0s, offeredLoad=20.0Mbps, packetSize=1024B, mobilitySpeed=3.0m/s, lifiRate=100.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 20.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 3.0,
+          "lifi_rate_mbps": 100.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    },
+    {
+      "run_id": "20260619T104709Z-hybrid-seed3-t10p0-l20p0-s3p0",
+      "status": "completed",
+      "scenario": {
+        "version": "1.0",
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "random_seed": 3,
+        "mobility": {
+          "mode": "random_walk",
+          "area_width_m": 50.0,
+          "area_height_m": 50.0,
+          "speed_mps": 1.5
+        },
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "wifi": {
+          "mode": "infrastructure",
+          "stations": 3,
+          "access_points": 1,
+          "standard": "802.11n",
+          "channel_width_mhz": 20
+        },
+        "lte": {
+          "enodebs": 1,
+          "ues": 3,
+          "use_epc": true
+        },
+        "lifi": {
+          "access_points": 1,
+          "cpes": 3,
+          "data_rate": "100Mbps",
+          "coverage_radius_m": 10.0
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points",
+          "Expanded dataset variant generated through parameter enumeration: seed=3, simTime=10.0s, offeredLoad=20.0Mbps, packetSize=1024B, mobilitySpeed=3.0m/s, lifiRate=100.0Mbps."
+        ],
+        "unsupported": [],
+        "expansion_parameters": {
+          "offered_load_mbps": 20.0,
+          "packet_size_bytes": 1024,
+          "mobility_speed_mps": 3.0,
+          "lifi_rate_mbps": 100.0
+        }
+      },
+      "review": {
+        "name": "indoor-hybrid",
+        "technology": "hybrid",
+        "duration_s": 10.0,
+        "mobility": "random_walk",
+        "traffic": {
+          "protocol": "udp",
+          "packet_size_bytes": 1024,
+          "data_rate": "10Mbps",
+          "start_s": 1.0,
+          "stop_s": 10.0
+        },
+        "topology": {
+          "cpes": 3,
+          "wifi_access_points": 1,
+          "lifi_access_points": 1,
+          "lte_enodebs": 1,
+          "lifi_model": "idealized indoor access link generated in ns-3 C++"
+        },
+        "metrics": {
+          "throughput": true,
+          "packet_loss": true,
+          "delay": true,
+          "jitter": true,
+          "flow_monitor": true,
+          "pcap": false,
+          "ascii_trace": false
+        },
+        "assumptions": [
+          "stock ns-3.44 has no built-in LiFi module; generated C++ must implement an idealized LiFi access link using standard ns-3 primitives without calling non-existent LiFi APIs",
+          "Must use ns-3.44 compatible API: PointToPointHelper::Install must not be passed two NodeContainers",
+          "Must use ns-3.44 compatible API: do not call Ipv4InterfaceContainer::GetInterface",
+          "3 CPEs act as multi-homed devices or separate nodes to connect to WiFi, LiFi, and LTE access points"
+        ],
+        "generated_script": "/home/ubuntu/Desktop/LLM Driven wireless environment generation/runs/20260511T163516Z-indoor-hybrid/generated.cc",
+        "next_command": "llm-ns3 run 20260511T163516Z-indoor-hybrid"
+      },
+      "raw_flows": 13,
+      "application_flows": 9
+    }
+  ],
+  "execution_summary": {
+    "source_run_count": 48,
+    "total_raw_flows": 624,
+    "uploaded_application_flows": 432,
+    "application_flows_with_rx": 432,
+    "mean_throughput_mbps": 7.4922742592592595,
+    "mean_delay_ms": 64.04096694444445,
+    "mean_jitter_ms": 0.5587404232857407,
+    "total_lost_packets": 87314.0
+  }
+}
