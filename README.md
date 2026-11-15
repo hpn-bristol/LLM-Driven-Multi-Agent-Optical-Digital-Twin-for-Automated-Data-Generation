@@ -97,7 +97,7 @@ GNPy_8_channels
 
 ## 🙌 Acknowledgment
 
-This work was partly supported by the **European Commission’s Horizon research and innovation program: Allegro project (No. 101092766)** and the **EU-funded project ECO-eNET (No. 10113933)**.
+This work was partly supported by the **European Commission’s Horizon research and innovation program: Allegro project (No. 101092766)** and the **EU-funded project ECO-eNET (No. 101139133)**.
 
 If you use optical data from this repository in your research, please cite the following paper:
  
